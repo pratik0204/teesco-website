@@ -1,15 +1,24 @@
 import React, { Fragment, Component } from 'react';
 import { Dialog, Grid, Container, TextField, Box, Button, Typography, CircularProgress, Checkbox, Link, InputAdornment, IconButton } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+import {Link as LinkTo} from 'react-router-dom'
+
+const initialStateData={
+    firstName:'',
+    lastName:'',
+    email:'',
+    password:'',
+    confirmPassword:'',
+    phoneNumber:'',
+    institution:'',
+    checkedB:false
+}
 
 export default class SignupForm extends Component{
     constructor(props) {
         super(props)
-        this.state = props.stateData ;
-        this.setState({
-            ...this.state,
-            showPassword:false
-        })
+       // initial state comes from storybook else provide the default initial state
+        this.state = props.stateData ? props.stateData : initialStateData;
     }
 
     classes={
@@ -258,12 +267,13 @@ export default class SignupForm extends Component{
                                         onChange={this.inputChangeHandler}
                                         name="checkedB"
                                         color="primary"/>
-                                    I agree to <Link>terms and conditions</Link> of Teesco and E-Cell NITRR Open Source
+                                    I agree to <Link>terms and conditions</Link> of Teesco and E-Cell NIT Raipur
                                 </Typography>
                             </Grid>
     
                             <Grid item xs={12}>
                                 <Grid container direction="row" justify="flex-end" alignItems="center">
+                                    <LinkTo to='/login/'>Already a User?</LinkTo>&nbsp;&nbsp;
                                     <Button 
                                         variant="contained" 
                                         color="primary"

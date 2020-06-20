@@ -4,8 +4,10 @@ import { isAuthenticated } from './utils/Token'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import LoginPage from './pages/Auth/Login'
+import SignUpPage from './pages/Auth/Signup'
 import SearchOrgPage from './pages/Guest/SearchOrg'
 import HomePage from './pages/Guest/Home'
+import { ThreeSixty } from '@material-ui/icons';
 
 
 class App extends Component {
@@ -55,6 +57,7 @@ class App extends Component {
         <Switch>
           <this.PrivateRoute exact path="/searchOrgs/" component={SearchOrgPage} />
           <this.PublicRoute exact path="/login/" component={LoginPage} />
+          <this.PublicRoute exact path="/signup/" component={SignUpPage} />
           <Route exact path='/' component={HomePage} />
         </Switch>
       </div>

@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Alert from "@material-ui/lab/Alert";
+import { Link } from "react-router-dom";
 
 
 // styles
@@ -97,6 +98,7 @@ export class LoginForm extends Component {
             />
           </Grid>
           <Grid item>
+            <Link to='/signup/'>New User?</Link>&nbsp;&nbsp;
             <Button
               type='submit'
               disabled={this.props.loading}
