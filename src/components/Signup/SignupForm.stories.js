@@ -10,6 +10,14 @@ export default {
     excludeStories: /.*Data$/, // export ending with Data wont be treated as a story
 }
 
+const errDict={
+    "email": "Email field is required.",
+    "name":"Name is required.",
+    "phone":"Phone number is required",
+    "password":"Password is required",
+    "institution":"Institution is required"
+}
+
 const initialStateData={
     firstName:'',
     lastName:'',
@@ -39,22 +47,20 @@ const loadingCase={
 
 const errorCase={
     ...initialStateData,
-    error:{
-        nullCase:"This field is required",
-    }
+    error:errDict
 }
 
-const errorSpecialCase={
-    ...beforeRequestStateData,
-    error:{
-        nullCase:"This field is required",
-        specialCase:"This email is already registered"
-    }
-}
+// const errorSpecialCase={
+//     ...beforeRequestStateData,
+//     error:{
+//         nullCase:"This field is required",
+//         specialCase:"This email is already registered"
+//     }
+// }
 
 
 export const initialState = () => <SignupForm stateData={object('state',initialStateData)} />
 export const beforeRequestState = () => <SignupForm stateData={object('state',beforeRequestStateData)} />
 export const loadingState = () => <SignupForm stateData={object('state',loadingCase)} />
 export const errorState = () => <SignupForm stateData={object('state',errorCase)} />
-export const errorSpecialState = () => <SignupForm stateData={object('state',errorSpecialCase)} />
+// export const errorSpecialState = () => <SignupForm stateData={object('state',errorSpecialCase)} />

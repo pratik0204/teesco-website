@@ -47,22 +47,27 @@ export default (state = initialState, action) => {
 
 
 // actions
-export const signUpUser = (fname,lname,email,password,phone) => dispatch => {
+export const signUpUser = (firstName,lastName,email,password,phoneNumber,institution) => dispatch => {
 
-    let name=fname.concat(" ",lname);
+    let name=firstName.concat(" ",lastName);
 
     dispatch({
-        type: LOGIN_FORM_SET_LOADING,
+        type: SIGNUP_FORM_SET_LOADING,
     })
 
     ApiClient().post('/users/register/', {
-        email, name, password, phone
+        email,
+        name, 
+        password, 
+        phone:phoneNumber,
+        institution,
+        country_code:"+91"
     })
         .then(response => {
 
-            dispatch({
-                type: SIGNUP_FORM_SIGNUP_SUCCESS,
-            })
+            // dispatch({
+            //     type: SIGNUP_FORM_SIGNUP_SUCCESS,
+            // })
 
         }).catch(err => {
             const { statusCode, errorDict } = makeErrorDict(err)
@@ -71,32 +76,17 @@ export const signUpUser = (fname,lname,email,password,phone) => dispatch => {
                 case 421:
                     alert("Please check your internet connection")
                     dispatch({
-                        type: LOGIN_FORM_LOGIN_SUCCESS,
-                    })
-                    break
-                case 401:
-                case 404:
-                    dispatch({
-                        type: LOGIN_USER_SPECIAL_ERROR,
-                        payload: errorDict['detail']
+                        type: SIGNUP_FORM_SIGNUP_SUCCESS,
                     })
                     break
                 case 400:
                 default:
                     dispatch({
-                        type: LOGIN_USER_INPUT_ERROR,
+                        type: SINGUP_USER_INPUT_ERROR,
                         payload: errorDict
                     })
                     break
             }
 
         })
-}
-
-export const logoutUser = () => dispatch => {
-    eraseToken()
-    dispatch({
-        type: LOGOUT_USER
-    })
-    CustomHistory.push('/login/')
 }
